@@ -10,13 +10,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-composer require kirillemko/yii-ci-integration "dev-master"
+composer require kirillemko/yii-ci-integration
 ```
 
 or add
 
 ```json
-"kirillemko/yii-ci-integration": "dev-master"
+"kirillemko/yii-ci-integration": "*"
 ```
 
 to the require section of your composer.json.
@@ -27,7 +27,8 @@ Usage
 
 Create yii_config.php file in your CodeIgniter config folder
 ```
-$ci = &get_instance();
+<?php
+include( APPPATH . '/config/database.php');
 
 return [
     'id' => 'yii_sub_app',
@@ -35,9 +36,9 @@ return [
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host='.$ci->db->hostname.';dbname='.$ci->db->database.'',
-            'username' => $ci->db->username,
-            'password' => $ci->db->password,
+            'dsn' => 'mysql:host='.$db['default']['hostname'].';dbname='.$db['default']['database'].'',
+            'username' => $db['default']['username'],
+            'password' => $db['default']['password'],
             'charset' => 'utf8',
         ],
     ]
@@ -80,6 +81,13 @@ Finally, load Yii core where needed
 require_once(APPPATH . '../vendor/yiisoft/yii2/Yii.php');
 $yiiConfig = require APPPATH . 'config/yii_config.php';
 new \yii\web\Application($yiiConfig); // Do NOT call run() here
+```
+
+
+To run Yii migrtions run
+
+```
+vendor\kirillemko\yii-ci-integration\src\yii migrate
 ```
 
 Credits

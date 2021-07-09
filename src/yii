@@ -1,0 +1,33 @@
+#!/usr/bin/env php
+<?php
+defined('YII_DEBUG') or define('YII_DEBUG', true);
+
+$rootPath = realpath(__DIR__ . '/../../../../');
+
+define('APPPATH', $rootPath . '/application/');
+define('BASEPATH', 'dummy');
+
+$composerAutoload = [
+    $rootPath . '/vendor/autoload.php', // in yii2-dev repo
+    $rootPath . '/../autoload.php', // installed as a composer binary
+];
+$vendorPath = null;
+foreach ($composerAutoload as $autoload) {
+    if (file_exists($autoload)) {
+        require $autoload;
+        $vendorPath = dirname($autoload);
+        break;
+    }
+}
+
+
+require $rootPath . '/vendor/yiisoft/yii2/Yii.php';
+
+
+$yiiConfig = require $rootPath . '/application/config/yii_config.php';
+$application = new yii\console\Application($yiiConfig);
+if ($vendorPath !== null) {
+    $application->setVendorPath($vendorPath);
+}
+$exitCode = $application->run();
+exit($exitCode);
