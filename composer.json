@@ -1,0 +1,22 @@
+{
+    "name": "kirillemko/yii-ci-integration",
+    "description": "Kogo dostal codeigniter no net shansov yiti",
+    "keywords": ["yii2", "codeigniter"],
+    "license": "BSD-3-Clause",
+    "type": "library",
+    "require": {
+        "php": ">=5.6",
+        "yidas/codeigniter-psr4-autoload": "^1.0",
+        "cebe/assetfree-yii2": "^2.0"
+    },
+    "authors": [
+        {
+            "name": "Kirill Emelianenko",
+            "email": "kirill.emko@mail.ru"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "kirillemko\\yci\\": "src\\" }
+    }
+
+}
