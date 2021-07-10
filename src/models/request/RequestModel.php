@@ -65,12 +65,7 @@ class RequestModel extends Model
 
     public function load($data=null, $formName = null, $isJson=true)
     {
-        $ci = &get_instance();
-        if( $isJson ){
-            $data = json_decode($ci->security->xss_clean($ci->input->raw_input_stream), true);
-        } else {
-            $data = $_REQUEST;
-        }
+        $data = \Yii::$app->request->isGet ? \Yii::$app->request->get() : \Yii::$app->request->post();
         $models = $this->models();
 
         if (!is_array($models)) {
