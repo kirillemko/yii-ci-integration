@@ -7,6 +7,8 @@ $rootPath = realpath(__DIR__ . '/../../../../');
 define('APPPATH', $rootPath . '/application/');
 define('BASEPATH', 'dummy');
 
+define('APP_CONSOLE', true);
+
 $composerAutoload = [
     $rootPath . '/vendor/autoload.php', // in yii2-dev repo
     $rootPath . '/../autoload.php', // installed as a composer binary

@@ -28,21 +28,49 @@ Usage
 Create yii_config.php file in your CodeIgniter config folder
 ```
 <?php
-include( APPPATH . '/config/database.php');
 
-return [
+include(APPPATH . '/config/database.php');
+
+$commonConfig = [
     'id' => 'yii_sub_app',
     'basePath' => dirname(__DIR__),
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host='.$db['default']['hostname'].';dbname='.$db['default']['database'].'',
+            'dsn' => 'mysql:host=' . $db['default']['hostname'] . ';dbname=' . $db['default']['database'] . '',
             'username' => $db['default']['username'],
             'password' => $db['default']['password'],
             'charset' => 'utf8',
         ],
+    ],
+
+];
+
+$webOnlyConfig = [
+    'components' => [
+        'request' => [
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ]
+        ],
     ]
 ];
+
+$consoleOnlyConfig = [
+    'bootstrap' => ['gii'],
+    'modules' => [
+        'gii' => [
+            'class' => 'yii\gii\Module',
+        ],
+    ],
+];
+
+if (defined('APP_CONSOLE')) {
+    return array_merge_recursive($commonConfig, $consoleOnlyConfig);
+}
+
+return array_merge_recursive($commonConfig, $webOnlyConfig);
+
 ```
 
 To sync Yii User component with CodeIgniter one, please register my user component, set identityClass the same way you make it in Yii and implement ExternalIdentityInterface in this class
