@@ -13,7 +13,7 @@ use yii\base\InvalidConfigException;
 use yii\base\InvalidValueException;
 
 
-class User extends yii\web\User
+class User extends \yii\web\User
 {
 
     public $identityClass;
