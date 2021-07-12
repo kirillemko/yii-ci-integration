@@ -13,23 +13,24 @@ use yii\base\InvalidConfigException;
 use yii\base\InvalidValueException;
 
 
-class User extends Component
+class User extends yii\web\User
 {
 
     public $identityClass;
     private $_identity = false;
 
+
     /**
      * Initializes the application component.
      */
-    public function init()
-    {
-        parent::init();
-
-        if ($this->identityClass === null) {
-            throw new InvalidConfigException('User::identityClass must be set.');
-        }
-    }
+//    public function init()
+//    {
+//        parent::init();
+//
+//        if ($this->identityClass === null) {
+//            throw new InvalidConfigException('User::identityClass must be set.');
+//        }
+//    }
 
 
 
