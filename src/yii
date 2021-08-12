@@ -6,6 +6,7 @@ $rootPath = realpath(__DIR__ . '/../../../../');
 
 define('APPPATH', $rootPath . '/application/');
 define('BASEPATH', 'dummy');
+define('ENVIRONMENT', 'dev');
 
 define('APP_CONSOLE', true);
 
